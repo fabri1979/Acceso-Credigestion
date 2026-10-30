@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Credigestión</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="cg-icon-192.png">
+<link rel="apple-touch-icon" href="cg-apple-touch-icon.png">
+<meta name="theme-color" content="#041E4E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Credigestión">
+<style>
+  :root { --azul:#041E4E; --rojo:#FF113B; --gris:#5B6475; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+         background:#FFFFFF; color:var(--azul); font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+         padding:24px 16px; text-align:center; }
+  .box { max-width:360px; width:100%; }
+  img { width:120px; height:120px; }
+  h1 { font-size:24px; margin:16px 0 6px; }
+  p { color:var(--gris); font-size:15px; line-height:1.5; margin:0 0 22px; }
+  a.btn { display:block; background:var(--rojo); color:#fff; text-decoration:none; font-weight:600;
+          padding:14px; border-radius:12px; font-size:16px; }
+  .tip { margin-top:18px; font-size:13px; }
+</style>
+</head>
+<body>
+<div class="box">
+  <img src="cg-icon-512.png" alt="Credigestión">
+  <h1>Credigestión</h1>
+  <p id="msg">Abriendo la plataforma…</p>
+  <a class="btn" href="http://157.100.144.14:8106/">Abrir la plataforma</a>
+  <p class="tip" id="tip"></p>
+</div>
+<script>
+  // Dirección de la plataforma: si cambia, edita solo esta línea y el enlace de arriba
+  const PLATAFORMA = 'http://157.100.144.14:8106/';
+
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+
+  const instalada = window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  if (instalada) {
+    location.replace(PLATAFORMA);
+  } else {
+    document.getElementById('msg').textContent = 'Instala esta app para entrar a la plataforma con un toque.';
+    document.getElementById('tip').textContent = 'Android: tres puntos → Instalar. iPhone: Compartir → Agregar a inicio.';
+  }
+</script>
+</body>
+</html>
